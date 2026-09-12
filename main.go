@@ -20,7 +20,7 @@ const usage = "usage: transfer-eta --size <size> --rate <rate> [--json]\n" +
 
 func main() {
 	sizeFlag := flag.String("size", "", "transfer size, e.g. 4.7GB or 650MiB")
-	rateFlag := flag.String("rate", "", "transfer rate, e.g. 25MB/s")
+	rateFlag := flag.String("rate", "", "transfer rate, e.g. 25MB/s or 100Mbps")
 	durationFlag := flag.String("duration", "", "transfer duration, e.g. 1h30m or 90s")
 	jsonFlag := flag.Bool("json", false, "output machine-readable JSON instead of a human-readable line")
 	flag.Parse()

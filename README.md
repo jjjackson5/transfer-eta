@@ -32,7 +32,9 @@ solved for.
   binary units (KiB, MiB, GiB, TiB, PiB, 1024-based). A bare number is
   treated as bytes.
 - `--rate` accepts a size followed by `/s` (also `/sec`, `/second`),
-  e.g. `25MB/s`, `650KiB/s`, `1.5GB/s`.
+  e.g. `25MB/s`, `650KiB/s`, `1.5GB/s`. It also accepts bits-per-second
+  shorthand: `100Mbps`, `1.5Gbps`, `500Kbps`, `500bps` (converted to
+  bytes per second by dividing by 8).
 - `--duration` accepts a combination of `d`, `h`, `m`, `s` units, e.g.
   `1h30m`, `90s`, `3d4h`. A bare number is treated as seconds.
 
@@ -61,7 +63,6 @@ No external dependencies — standard library only.
 
 ## Not supported yet
 
-- Rates quoted in bits per second (Mbps, Gbps) — everything is bytes for now
 - Sub-second precision for very fast, very small transfers
 
 ## License
