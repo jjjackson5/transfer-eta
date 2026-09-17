@@ -5,15 +5,25 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // formatDuration renders a number of seconds as a compact human string
-// like "1h2m3s" or "3d4h". time.Duration isn't used here because transfer
-// times can run into weeks at low enough rates, well past what most
-// people want to see expressed in nanosecond-precision Duration units.
+// like "1h2m3s" or "3d4h". time.Duration isn't used for that range because
+// transfer times can run into weeks at low enough rates, well past what
+// most people want to see expressed in nanosecond-precision Duration units.
+//
+// Below one second, rounding to the nearest second would just print "0s"
+// for every fast transfer, which is the common case for small files on a
+// LAN or loopback link. time.Duration's own formatting already picks a
+// sensible unit (ms, µs, ns) there, so it's used directly.
 func formatDuration(seconds float64) string {
 	if seconds < 0 {
 		seconds = 0
+	}
+
+	if seconds > 0 && seconds < 1 {
+		return time.Duration(seconds * float64(time.Second)).String()
 	}
 
 	total := int64(seconds + 0.5) // round to the nearest second
